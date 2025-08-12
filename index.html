@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留学生课业辅导-4V1在线辅导</title>
+
+  <!-- 引入 Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- 导入自定义的css -->
+  <link href="src/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="hero-header position-relative" style="height:100vh;min-height:500px;">
+    <!-- 内嵌导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark hero-navbar px-4 py-3">
+      <a class="navbar-brand" href="#">
+        <img src="src/image/logo.png" alt="logo" id="navbar-logo" style="height:44px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#">主页</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why-us">关于我们</a></li>
+          <li class="nav-item"><a class="nav-link" href="#cases">真实案例</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">师资力量</a></li>
+        </ul>
+        <a class="btn btn-primary ml-3" href="#contact">立即咨询</a>
+      </div>
+    </nav>
+
+    <!-- Banner轮播 -->
+    <div id="bannerCarousel" class="carousel slide carousel-fade hero-carousel" data-ride="carousel"
+      data-interval="5000" data-touch="true">
+      <ol class="carousel-indicators">
+        <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#bannerCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <!-- Banner 1 -->
+        <div class="carousel-item active">
+          <div class="hero-bg" style="background-image: url(src/image/banner-1.jpg);"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
+            <p class="hero-desc mb-4">提升GPA，专业团队全程服务</p>
+            <h1 class="hero-title mb-4">4V1辅导模式<br>从青铜进阶为王者</h1>
+            <button class="btn btn-primary hero-btn mb-2" id="copyBtn1">点击复制微信号</button>
+            <input class="form-control text-center mx-auto hero-input" type="text" value="banqiao17" id="wechatInput1"
+              readonly>
+          </div>
+        </div>
+        <!-- Banner 2 -->
+        <div class="carousel-item">
+          <div class="hero-bg" style="background-image: url(src/image/banner-2.jpg);"></div>
+          <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
+            <p class="hero-desc mb-4">专注留学生学业，帮你解决难题</p>
+            <h1 class="hero-title mb-4">论文辅导/Essay辅导/考试辅导/课程辅导</h1>
+            <button class="btn btn-primary hero-btn mb-2" id="copyBtn2">点击复制微信号</button>
+            <input class="form-control text-center mx-auto hero-input" type="text" value="banqiao17" id="wechatInput2"
+              readonly>
+          </div>
+        </div>
+      </div>
+      <!-- 左右箭头 -->
+      <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="sr-only">上一个</span>
+      </a>
+      <a class="carousel-control-next" href="#bannerCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="sr-only">下一个</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 介绍优势的区域 -->
+  <section class="py-5 bg-light" id="why-us">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <!-- 左图区块 -->
+        <div class="advantage-left col-xl-5 col-lg-5 lg-mb-40">
+          <div class="position-relative d-inline-block advantage-img-wrapper">
+            <img id="advantage-main-img" src="src/image/advantage-1.png" alt>
+            <div class="advantage-counter badge badge-primary position-absolute">
+              <h2 style="color:#92EC13"><span class="counter" id="advantage-cases-num">5000</span>+</h2>
+              <p style="font-size:130%">案例</p>
+            </div>
+          </div>
+        </div>
+        <!-- 右文案区块 -->
+        <div class="col-lg-7">
+          <p class="tutor-title">
+            <span id="advantage-title">为什么选择我们</span>
+          </p>
+          <p class="tutor-lead">
+            <span>5年实体公司，专注学业辅导</span>
+          </p>
+          <div id="advantage-list">
+            <!-- 单条优势项 -->
+            <div class="media mb-4">
+              <div class="media-left mr-3">
+                <span class="d-inline-block rounded-circle text-white text-center"
+                  style="width:50px; height:50px; line-height:50px; font-size:24px; background-color: #6610f2;">
+                  <i class="fas fa-user-friends"></i>
+                </span>
+              </div>
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">4V1全方位服务</h5>
+                <p class="mb-0">老师、顾问、助教、教务多对一贴心服务，全天候答疑。</p>
+              </div>
+            </div>
+            <div class="media mb-4">
+              <div class="media-left mr-3">
+                <span class="d-inline-block rounded-circle text-white text-center"
+                  style="width:50px; height:50px; line-height:50px; font-size:24px; background-color: #6610f2;">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                </span>
+              </div>
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">强大师资力量</h5>
+                <p class="mb-0">导师均来自QS前100名校，深厚学术背景，丰富教学经验。</p>
+              </div>
+            </div>
+            <div class="media mb-4">
+              <div class="media-left mr-3">
+                <span class="d-inline-block rounded-circle text-white text-center"
+                  style="width:50px; height:50px; line-height:50px; font-size:24px; background-color: #6610f2;">
+                  <i class="fas fa-shield-alt"></i>
+                </span>
+              </div>
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">安全保障</h5>
+                <p class="mb-0">全流程签约，信息安全严格保密，售后有保障。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 介绍特色服务区 -->
+  <section class="py-5" id="services">
+    <div class="container">
+      <div class="row" id="service-list">
+        <!-- 服务项1 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 text-center border-0 shadow-sm py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px; height:60px; font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-book"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">全科课程辅导</h5>
+            <p class="text-muted mb-0">涵盖理工、商科、人文各大科目，助力成绩提升。</p>
+          </div>
+        </div>
+        <!-- 服务项2 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 text-center border-0 shadow-sm py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px; height:60px; font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">论文写作辅导</h5>
+            <p class="text-muted mb-0">指导论文结构、选题与润色，提升写作能力。</p>
+          </div>
+        </div>
+        <!-- 服务项3 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 text-center border-0 shadow-sm py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px; height:60px; font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-stopwatch"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">考前冲刺辅导</h5>
+            <p class="text-muted mb-0">梳理重点难点，制定高效备考方案。</p>
+          </div>
+        </div>
+        <!-- 服务项4 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 text-center border-0 shadow-sm py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px; height:60px; font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-chart-line"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">作业提分辅导</h5>
+            <p class="text-muted mb-0">作业专项讲解，逐步提升解题能力。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 高分案例轮播区 -->
+  <section class="py-5" id="cases">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap">
+        <!-- 左边标题区 -->
+        <div>
+          <div class="cases-subtitle">高分案例&nbsp;&nbsp;&nbsp;</div>
+          <div class="cases-title">真实力真高分</div>
+        </div>
+
+        <!-- 右边按钮区 -->
+        <div class="mt-3 mt-lg-0">
+          <button id="casePrev" class="btn btn-outline-purple btn-sm mr-2 rounded-circle"
+            style="width:42px;height:42px;">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button id="caseNext" class="btn btn-outline-purple btn-sm rounded-circle"
+            style="width:42px;height:42px;">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="position-relative">
+      <!-- 左右按钮 -->
+      <div class="swiper cases-swiper">
+        <div class="swiper-wrapper">
+          <!-- js加载卡片列表 -->
+          <div class="cases-scroll-wrapper" id="casesList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务承诺区 -->
+  <section class="py-5" id="promise">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="tutor-title">
+          <span id="promise-title">服务承诺</span>
+        </p>
+        <p class="tutor-lead">
+          <span>课堂学习保障</span>
+        </p>
+      </div>
+      <div class="row">
+        <!-- 承诺1 -->
+        <div class="col-md-4 mb-4">
+          <div class="card border-0 h-100 shadow-sm text-center py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px;height:60px;font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-file-contract"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">合同保障</h5>
+            <p class="text-muted mb-0">课前签署正规合同，收费透明合规</p>
+          </div>
+        </div>
+        <!-- 承诺2 -->
+        <div class="col-md-4 mb-4">
+          <div class="card border-0 h-100 shadow-sm text-center py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px;height:60px;font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-headset"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">售后保障</h5>
+            <p class="text-muted mb-0">辅导不满意，课时费随时退</p>
+          </div>
+        </div>
+        <!-- 承诺3 -->
+        <div class="col-md-4 mb-4">
+          <div class="card border-0 h-100 shadow-sm text-center py-4">
+            <div class="mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center text-white"
+                style="width:60px;height:60px;font-size:2rem; background-color: #6610f2;">
+                <i class="fas fa-shield-alt"></i>
+              </span>
+            </div>
+            <h5 class="mb-2">信息保障</h5>
+            <p class="text-muted mb-0">严格保护学员隐私，信息安全无忧</p>
+          </div>
+        </div>
+        <!-- 可继续添加承诺 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 师资团队展示 -->
+  <section class="py-5 bg-light" id="team">
+    <div class="container">
+      <div class="text-center mb-5">
+        <p class="tutor-title">
+          <span id="promise-title">导师团队</span>
+        </p>
+        <p class="tutor-lead">
+          <span>优质海量师资力量</span>
+        </p>
+      </div>
+      <div class="row">
+        <!-- 导师1 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <img src="src/image/team-1.png" class="rounded-circle mx-auto mb-3" alt="导师1"
+              style="width:100px;height:100px;object-fit:cover;">
+            <h5 class="mb-1">Michael 老师</h5>
+            <p class="text-primary mb-1">计算机与科学博士</p>
+            <p class="text-muted small mb-0">多年国际课程教学经验，擅长算法与编程辅导。</p>
+          </div>
+        </div>
+        <!-- 导师2 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <img src="src/image/team-2.png" class="rounded-circle mx-auto mb-3" alt="导师2"
+              style="width:100px;height:100px;object-fit:cover;">
+            <h5 class="mb-1">Mary 老师</h5>
+            <p class="text-success mb-1">经济学讲师</p>
+            <p class="text-muted small mb-0">海外留学背景，深耕经济金融领域十余年。</p>
+          </div>
+        </div>
+        <!-- 导师3 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <img src="src/image/team-3.png" class="rounded-circle mx-auto mb-3" alt="导师3"
+              style="width:100px;height:100px;object-fit:cover;">
+            <h5 class="mb-1">Joseph 老师</h5>
+            <p class="text-info mb-1">数学与统计学博士</p>
+            <p class="text-muted small mb-0">逻辑严谨，擅长各类理工类课程讲解。</p>
+          </div>
+        </div>
+        <!-- 导师4 -->
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 border-0 shadow-sm text-center py-4">
+            <img src="src/image/team-4.png" class="rounded-circle mx-auto mb-3" alt="导师4"
+              style="width:100px;height:100px;object-fit:cover;">
+            <h5 class="mb-1">Susan 老师</h5>
+            <p class="text-warning mb-1">Marketing 博士</p>
+            <p class="text-muted small mb-0">专业营销背景，助力同学掌握实用商业技能。</p>
+          </div>
+        </div>
+        <!-- 可继续添加更多导师 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据统计区 -->
+  <section class="py-5" id="stats">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6 col-md-3 mb-4">
+          <div class="stat-card border-0 shadow-sm py-4 stats-animate">
+            <div class="border-0 shadow-sm py-4">
+              <div class="mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center text-white"
+                  style="width:60px;height:60px;background-color: #6610f2;border-radius: 10%;">
+                  <i class="fas fa-award fa-2x "></i>
+                </span>
+              </div>
+              <h2><span class="counter">5000</span></h2>
+              <div class="text-muted stats-word">辅导成功案例</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <div class="stat-card border-0 shadow-sm py-4 stats-animate">
+            <div class="border-0 shadow-sm py-4">
+              <div class="mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center text-white"
+                  style="width:60px;height:60px;background-color: #6610f2;border-radius: 10%;">
+                  <i class="fas fa-book-open fa-2x"></i>
+                </span>
+              </div>
+              <h2 style="color:#fff"><span class="counter">500</span>+</h2>
+              <div class="text-muted stats-word">覆盖科目</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <div class="stat-card border-0 shadow-sm py-4 stats-animate">
+            <div class="border-0 shadow-sm py-4">
+              <div class="mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center text-white"
+                  style="width:60px;height:60px;background-color: #6610f2;border-radius: 10%;">
+                  <i class="fas fa-thumbs-up fa-2x"></i>
+                </span>
+              </div>
+              <h2><span class="counter">97</span></h2>
+              <div class="text-muted stats-word">好评率 (%)</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <div class="stat-card border-0 shadow-sm py-4 stats-animate">
+            <div class="border-0 shadow-sm py-4">
+              <div class="mb-2">
+                <span class="d-inline-flex align-items-center justify-content-center text-white"
+                  style="width:60px;height:60px;background-color: #6610f2;border-radius: 10%;">
+                  <i class="fas fa-users fa-2x"></i>
+                </span>
+              </div>
+              <h2><span class="counter">5000</span></h2>
+              <div class="text-muted stats-word">师资团队</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评价区 -->
+  <section class="py-5" id="testimonials">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- 左侧：标题区 -->
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="mb-4">
+            <p class="tutor-title">
+              <span id="promise-title">好评反馈</span>
+            </p>
+            <p class="tutor-lead">
+              <span>看看真实学员的心声</span>
+            </p>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <button id="testimonialPrev" class="btn btn-outline-purple btn-sm mr-2 rounded-circle"
+              style="width:42px;height:42px;">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="testimonialNext" class="btn btn-outline-purple btn-sm rounded-circle"
+              style="width:42px;height:42px;">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- 右侧：滑动卡片区 -->
+        <div class="col-lg-8">
+          <div class="swiper testimonial-swiper">
+            <div class="swiper-wrapper" id="testimonialsList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+  <section class="py-5" id="contact">
+    <div class="contact-bg-blur">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="text-white font-weight-bold" style="letter-spacing:.05em;">联系我们</h2>
+          <p class="lead text-white-50 mb-0" style="opacity:.85;">扫码添加微信，我们7×24小时为你服务</p>
+        </div>
+        <div class="row align-items-center justify-content-center">
+          <!-- 左：二维码 -->
+          <div class="col-md-5 mb-4 mb-md-0">
+            <div class="contact-card glassy-card text-center py-4 px-3">
+              <img src="src/image/erweima-sally.jpg" alt="微信二维码" class="img-fluid mb-3"
+                style="width:160px;height:160px;border-radius:1rem;">
+              <div class="small text-white-50" style="letter-spacing:.03em;">微信号：<b style="color:#fff">banqiao17</b>
+              </div>
+            </div>
+          </div>
+          <!-- 右：表单 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚区域 -->
+  <footer class="bg-dark text-light pt-4 pb-2" id="footer">
+    <div class="container text-center">
+      <div class="mb-2">
+        <a href="#" class="text-light mx-2">首页</a>|
+        <a href="#about" class="text-light mx-2">关于我们</a>|
+        <a href="#services" class="text-light mx-2">特色服务</a>|
+        <a href="#cases" class="text-light mx-2">高分案例</a>|
+        <a href="#team" class="text-light mx-2">师资团队</a>|
+        <a href="#contact" class="text-light mx-2">联系我们</a>
+      </div>
+      <div class="mb-2 small">
+        Copyright &copy; 2024 GPA管家 All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <a href="#" class="scroll-top rounded-circle shadow" id="scrollTopBtn" title="返回顶部"
+    style="display:none;position:fixed;right:32px;bottom:48px;z-index:999;width:46px;height:46px;line-height:46px;text-align:center;background:#6610f2;color:#fff;font-size:1.5rem;">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- 引入 jQuery 和 Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="src/js/jquery.counterup.min.js"></script>
+  <!-- 导入自定义的js -->
+  <script src="src/js/custom.js"></script>
+</body>
+
+</html>
