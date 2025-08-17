@@ -11,11 +11,16 @@
 
         gtag('config', 'G-CQQTXZF8WN');
     </script>
-    <script>
-        const EDGE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co/functions/v1/site-config';
-        const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXVtam5vYnJnbm90Y2Fza3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MTc0NjEsImV4cCI6MjA3MDk5MzQ2MX0.RVISEUpxDqeKBROIHgndGepSITZVWxeZ3H7PkNn-Gt8'; // 可放在 NEXT_PUBLIC_SUPABASE_ANON_KEY
+    <!-- 放在 </body> 之前；使用 ESM 方式引入 supabase-js -->
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-        // 写入输入框并绑定复制
+        // 1) 用你项目的 URL 和 anon 公钥初始化（anon 是可公开的）
+        const SUPABASE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXVtam5vYnJnbm90Y2Fza3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MTc0NjEsImV4cCI6MjA3MDk5MzQ2MX0.RVISEUpxDqeKBROIHgndGepSITZVWxeZ3H7PkNn-Gt8';
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 2) 写入输入框并绑定复制
         function setWechat(wechat) {
             const input = document.getElementById('wechatInput1');
             if (input) input.value = wechat || '';
@@ -23,7 +28,7 @@
             const btn = document.getElementById('copyBtn1');
             if (btn) {
                 btn.onclick = () => {
-                    if (navigator.clipboard && input.value) {
+                    if (navigator.clipboard && input?.value) {
                         navigator.clipboard.writeText(input.value)
                             .then(() => alert('微信号已复制：' + input.value))
                             .catch(() => alert('复制失败，请手动复制'));
@@ -32,26 +37,31 @@
             }
         }
 
+        // 3) 调用 Edge Function（POST），让服务端按域名识别站点
         async function loadConfig() {
             try {
-                const res = await fetch(EDGE_URL, {
+                const { data, error } = await supabase.functions.invoke('site-config', {
+                    // 传个无关的 body 即可；函数主要靠请求头&query，不靠 body
+                    body: { ping: true },
                     headers: {
-                        Authorization: `Bearer ${ANON}`,
-                        apikey: ANON,
+                        // 补上传入的主机名，便于函数用它匹配 sites.primary_domain
+                        'x-forwarded-host': window.location.host,
+                        // 如果你想指定语言，也可以用 query 参数：?locale=zh-CN
+                        // 但 invoke 没有内置 query 选项，这里用自定义头传给函数也行
+                        // 不过建议还是把语言放到页面 URL 上，由前端 fetch GET 带上
                     },
                 });
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const json = await res.json();
 
-                // Edge Function 返回结构示例 { config: { wechat_number: "xxx" } }
-                const cfg = json?.config || {};
+                if (error) throw error;
+
+                // 你的函数返回 { host, matched_primary_domain, public_id, locale, config }
+                const cfg = data?.config || {};
                 const wechat =
                     cfg.wechat_number ||
                     (cfg.socials && (cfg.socials.wechat || cfg.socials.weixin)) ||
                     '';
 
                 setWechat(wechat);
-
             } catch (e) {
                 console.error('加载配置失败：', e);
                 setWechat('');
@@ -60,6 +70,7 @@
 
         document.addEventListener('DOMContentLoaded', loadConfig);
     </script>
+
 
 
     <meta charset="UTF-8">
