@@ -11,8 +11,58 @@
 
         gtag('config', 'G-CQQTXZF8WN');
     </script>
+    <script>
+        const EDGE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co/functions/v1/swift-service';
+        const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXVtam5vYnJnbm90Y2Fza3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MTc0NjEsImV4cCI6MjA3MDk5MzQ2MX0.RVISEUpxDqeKBROIHgndGepSITZVWxeZ3H7PkNn-Gt8'; // 可放在 NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  <meta charset="UTF-8">
+        // 写入输入框并绑定复制
+        function setWechat(wechat) {
+            const input = document.getElementById('wechatInput1');
+            if (input) input.value = wechat || '';
+
+            const btn = document.getElementById('copyBtn1');
+            if (btn) {
+                btn.onclick = () => {
+                    if (navigator.clipboard && input.value) {
+                        navigator.clipboard.writeText(input.value)
+                            .then(() => alert('微信号已复制：' + input.value))
+                            .catch(() => alert('复制失败，请手动复制'));
+                    }
+                };
+            }
+        }
+
+        async function loadConfig() {
+            try {
+                const res = await fetch(EDGE_URL, {
+                    headers: {
+                        Authorization: `Bearer ${ANON}`,
+                        apikey: ANON,
+                    },
+                });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const json = await res.json();
+
+                // Edge Function 返回结构示例 { config: { wechat_number: "xxx" } }
+                const cfg = json?.config || {};
+                const wechat =
+                    cfg.wechat_number ||
+                    (cfg.socials && (cfg.socials.wechat || cfg.socials.weixin)) ||
+                    '';
+
+                setWechat(wechat);
+
+            } catch (e) {
+                console.error('加载配置失败：', e);
+                setWechat('');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadConfig);
+    </script>
+
+
+    <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>留学生课业辅导-4V1在线辅导</title>
 
@@ -65,9 +115,8 @@
           <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
             <p class="hero-desc mb-4">提升GPA，专业团队全程服务</p>
             <h1 class="hero-title mb-4">4V1辅导模式<br>从青铜进阶为王者</h1>
-            <button class="btn btn-primary hero-btn mb-2" id="copyBtn1">点击复制微信号</button>
-            <input class="form-control text-center mx-auto hero-input" type="text" value="banqiao17" id="wechatInput1"
-              readonly>
+              <button class="btn btn-primary hero-btn mb-2" id="copyBtn1">点击复制微信号</button>
+              <input class="form-control text-center mx-auto hero-input" id="wechatInput1" readonly>
           </div>
         </div>
         <!-- Banner 2 -->
@@ -409,7 +458,7 @@
                   <i class="fas fa-thumbs-up fa-2x"></i>
                 </span>
               </div>
-              <h2><span class="counter">97</span></h2>
+              <h2><span class="counter"><></span></h2>
               <div class="text-muted stats-word">好评率 (%)</div>
             </div>
           </div>
