@@ -15,8 +15,8 @@
 <script type="module">
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-  const SUPABASE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co';
-  const SUPABASE_ANON_KEY = '你的 anon key';
+  const SUPABASE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co/functions/v1/site-config';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXVtam5vYnJnbm90Y2Fza3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MTc0NjEsImV4cCI6MjA3MDk5MzQ2MX0.RVISEUpxDqeKBROIHgndGepSITZVWxeZ3H7PkNn-Gt8';
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   async function loadConfig() {
