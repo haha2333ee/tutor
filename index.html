@@ -12,42 +12,66 @@
         gtag('config', 'G-CQQTXZF8WN');
     </script>
     <!-- 放在 </body> 之前；使用 ESM 方式引入 supabase-js -->
+<!-- 放在 </body> 之前；改为用 fetch 直接调用 Edge Function（无需 supabase-js） -->
 <script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  // 你的 Functions Endpoint 与 固定 public_id
+  const ENDPOINT = "https://kaaumjnobrgnotcaskrw.supabase.co/functions/v1/site-config";
+  const PUBLIC_ID = "de40e491-6365-4f59-957d-11e810bf6d63"; // TODO: 换成你的固定 id
 
-  const SUPABASE_URL = 'https://kaaumjnobrgnotcaskrw.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthYXVtam5vYnJnbm90Y2Fza3J3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MTc0NjEsImV4cCI6MjA3MDk5MzQ2MX0.RVISEUpxDqeKBROIHgndGepSITZVWxeZ3H7PkNn-Gt8';
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  function setWechat(wechat) {
+    const input1 = document.getElementById("wechatInput1");
+    const btn1 = document.getElementById("copyBtn1");
+    if (input1) input1.value = wechat || "";
+    if (btn1) btn1.onclick = () => navigator.clipboard?.writeText(input1?.value || "");
+
+    // 第二屏也复用同一个微信号（如不需要可删掉下面两行）
+    const input2 = document.getElementById("wechatInput2");
+    const btn2 = document.getElementById("copyBtn2");
+    if (input2) input2.value = wechat || input2.value || "";
+    if (btn2) btn2.onclick = () => navigator.clipboard?.writeText(input2?.value || "");
+  }
 
   async function loadConfig() {
     try {
-      // 不传自定义 headers，浏览器会自动带 Origin
-      const { data, error } = await supabase.functions.invoke('site-config', {
-        body: { ping: true }, // 无实际意义，仅触发 POST
-      });
-      if (error) throw error;
+      // 用 GET 避免预检；Edge Function 已加 CORS *，可直接从浏览器请求
+      const url = `${ENDPOINT}?public_id=${encodeURIComponent(PUBLIC_ID)}`;
+      const res = await fetch(url, { method: "GET" });
 
-      const cfg = data?.config || {};
+      // 兜底解析
+      let payload = {};
+      try { payload = await res.json(); } catch { payload = {}; }
+
+      if (!res.ok) {
+        console.warn("site-config 调用失败：", res.status, payload);
+        setWechat(""); // 失败就清空
+        return;
+      }
+
+      // 你的 Edge Function 返回 { site_config: {...} }
+      const cfg = payload?.site_config ?? {};
+      // wechat_number 优先；若你后续把微信放进 JSON 列（如 socials.weixin），可在此补充兜底逻辑
       const wechat =
         cfg.wechat_number ||
-        (cfg.socials && (cfg.socials.wechat || cfg.socials.weixin)) || '';
+        cfg.socials?.wechat ||
+        cfg.socials?.weixin ||
+        "";
+
       setWechat(wechat);
     } catch (e) {
-      console.error('加载配置失败：', e);
-      setWechat('');
+      console.error("加载配置异常：", e);
+      setWechat("");
     }
   }
 
-  function setWechat(wechat) {
-    const input = document.getElementById('wechatInput1');
-    if (input) input.value = wechat || '';
-    const btn = document.getElementById('copyBtn1');
-    if (btn) btn.onclick = () => navigator.clipboard?.writeText(input.value);
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    loadConfig();
 
-  document.addEventListener('DOMContentLoaded', loadConfig);
+    // （可选）如果你把页面直接用 file:// 打开，建议用本地静态服务器，以免某些浏览器把来源视为 null
+    // 例如：npx serve .  或  python3 -m http.server 8000
+  });
 </script>
 
+    
 
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
