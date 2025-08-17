@@ -13,10 +13,9 @@
     </script>
     <!-- 放在 </body> 之前；使用 ESM 方式引入 supabase-js -->
 <!-- 放在 </body> 之前；改为用 fetch 直接调用 Edge Function（无需 supabase-js） -->
+<!-- 用 Edge Function 自动识别 host，不需要传 public_id -->
 <script type="module">
-  // 你的 Functions Endpoint 与 固定 public_id
   const ENDPOINT = "https://kaaumjnobrgnotcaskrw.supabase.co/functions/v1/site-config";
-  const PUBLIC_ID = "de40e491-6365-4f59-957d-11e810bf6d63"; // TODO: 换成你的固定 id
 
   function setWechat(wechat) {
     const input1 = document.getElementById("wechatInput1");
@@ -24,7 +23,6 @@
     if (input1) input1.value = wechat || "";
     if (btn1) btn1.onclick = () => navigator.clipboard?.writeText(input1?.value || "");
 
-    // 第二屏也复用同一个微信号（如不需要可删掉下面两行）
     const input2 = document.getElementById("wechatInput2");
     const btn2 = document.getElementById("copyBtn2");
     if (input2) input2.value = wechat || input2.value || "";
@@ -33,23 +31,18 @@
 
   async function loadConfig() {
     try {
-      // 用 GET 避免预检；Edge Function 已加 CORS *，可直接从浏览器请求
-      const url = `${ENDPOINT}?public_id=${encodeURIComponent(PUBLIC_ID)}`;
-      const res = await fetch(url, { method: "GET" });
+      const res = await fetch(ENDPOINT, { method: "GET" });
 
-      // 兜底解析
       let payload = {};
       try { payload = await res.json(); } catch { payload = {}; }
 
       if (!res.ok) {
         console.warn("site-config 调用失败：", res.status, payload);
-        setWechat(""); // 失败就清空
+        setWechat("");
         return;
       }
 
-      // 你的 Edge Function 返回 { site_config: {...} }
       const cfg = payload?.site_config ?? {};
-      // wechat_number 优先；若你后续把微信放进 JSON 列（如 socials.weixin），可在此补充兜底逻辑
       const wechat =
         cfg.wechat_number ||
         cfg.socials?.wechat ||
@@ -63,15 +56,9 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    loadConfig();
-
-    // （可选）如果你把页面直接用 file:// 打开，建议用本地静态服务器，以免某些浏览器把来源视为 null
-    // 例如：npx serve .  或  python3 -m http.server 8000
-  });
+  document.addEventListener("DOMContentLoaded", loadConfig);
 </script>
 
-    
 
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
